@@ -63,6 +63,6 @@ Activer ce filtre, relancer le serveur et vérifiez que vous ne pouvez accéder 
 Rajouter une nouvelle page pour ce site, accessible seulement à un rôle `RoleEnum.SUPER_ADMIN`
 
 Elle doit être accessible à l'adresse suivante : 
-`http://localhost:8080/auth/superadmin`
+[http://localhost:8080/auth/superadmin]()
 
 Attention, il faut aussi déclarer la vue WebMvcConfig

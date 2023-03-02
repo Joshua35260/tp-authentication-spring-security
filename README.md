@@ -7,7 +7,7 @@ Créer la base de données suivante pour l'atelier :
 
 nom : spring_security_demo
 username : springsercurityadmin
-password : TRFjh24$@2019
+password : WCS$@2023
 
 Comme vous pouvez le voir dans [src/main/java/com/wildcodeschool/spring/security/persistence/entities]()
 

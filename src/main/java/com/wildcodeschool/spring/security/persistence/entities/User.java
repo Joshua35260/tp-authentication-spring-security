@@ -26,6 +26,7 @@ import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,6 +36,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User implements UserDetails {
 
     /**

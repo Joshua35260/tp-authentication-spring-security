@@ -9,7 +9,7 @@ nom : spring_security_demo
 username : springsercurityadmin
 password : TRFjh24$@2019
 
-Comme vous pouvez le voir dans src/main/java/com/wildcodeschool/spring/security/persistence/entities
+Comme vous pouvez le voir dans [src/main/java/com/wildcodeschool/spring/security/persistence/entities]()
 
 qui contient une seule classe User
 

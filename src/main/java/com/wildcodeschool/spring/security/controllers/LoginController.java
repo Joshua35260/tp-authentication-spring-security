@@ -18,6 +18,7 @@ public class LoginController {
         if (!(auth instanceof AnonymousAuthenticationToken)) {  // l'utilisateur est déjà connecté
             return new ModelAndView("redirect:/errorAlreadyConnected");
         }
+
         return new ModelAndView("login");
     }
 }

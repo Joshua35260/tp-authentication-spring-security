@@ -3,32 +3,36 @@ package com.wildcodeschool.spring.security.persistence.entities;
 
 
 import com.wildcodeschool.spring.security.persistence.enums.RoleEnum;
-import com.wildcodeschool.spring.security.utils.BCryptManagerUtil;
-import lombok.Data;
+import com.wildcodeschool.spring.security.security_configuration.WebSecurityConfig;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.Table;
+import lombok.Data;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
+
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -94,8 +98,7 @@ public class User implements UserDetails {
 
     public User(String username, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
         this.username = username;
-        this.password = BCryptManagerUtil.passwordencoder().encode(password);
-//        this.password = password;
+        this.password = WebSecurityConfig.passwordEncoder.encode(password);
         this.firstname = firstname;
         this.lastname = lastname;
         this.accountNonExpired = true;

@@ -18,8 +18,14 @@ public class UserService implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
+	// 3. Fournir les utilisateurs à Spring Security
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return getUserByUsername(username);
+	}
+
+
+	public UserDetails getUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("No user present with username : " + username);

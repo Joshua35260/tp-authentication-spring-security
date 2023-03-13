@@ -41,6 +41,8 @@ public class WebSecurityConfig {
 		// 4. Configuration des autorisations de route
 		http
 			.authorizeHttpRequests()
+				.requestMatchers("/auth/admin**").hasRole(RoleEnum.ADMINISTRATOR.name())
+				.requestMatchers("/auth**").authenticated()
 				.anyRequest().permitAll()
 			.and()
 				.exceptionHandling()

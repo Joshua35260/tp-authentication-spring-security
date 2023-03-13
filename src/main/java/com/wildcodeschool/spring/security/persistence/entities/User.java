@@ -2,16 +2,21 @@ package com.wildcodeschool.spring.security.persistence.entities;
 
 
 
-import com.wildcodeschool.spring.security.persistence.enums.RoleEnum;
-import com.wildcodeschool.spring.security.security_configuration.WebSecurityConfig;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.util.StringUtils;
+
+import com.wildcodeschool.spring.security.persistence.enums.RoleEnum;
+import com.wildcodeschool.spring.security.security_configuration.WebSecurityConfig;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -27,12 +32,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Table;
 import lombok.Data;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -164,15 +163,16 @@ public class User implements UserDetails {
 
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = StringUtils.collectionToCommaDelimitedString(getRoles().stream()
-                .map(Enum::name).collect(Collectors.toList()));
-        return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
-    }
+        // String roles = StringUtils.collectionToCommaDelimitedString(getRoles().stream()
+        //         .map(Enum::name).collect(Collectors.toList()));
+        // return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
 
-    public void setPassword(String password) {
-        if (!password.isEmpty()) {
-            this.password = BCryptManagerUtil.passwordencoder().encode(password);
-        }
+		List<SimpleGrantedAuthority> userAuthorities = new ArrayList<>();
+		for (RoleEnum role : roles) {
+			userAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
+			// ===> ROLE_ADMINISTRATOR
+		}
+		return userAuthorities;
     }
 
 	@Override

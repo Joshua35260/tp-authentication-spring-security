@@ -169,12 +169,6 @@ public class User implements UserDetails {
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
-    public void setPassword(String password) {
-        if (!password.isEmpty()) {
-            this.password = BCryptManagerUtil.passwordencoder().encode(password);
-        }
-    }
-
 	@Override
 	public String getPassword() {
 		return this.password;
